@@ -735,8 +735,7 @@ public final class Tools {
 
     public static String[] getMinecraftJVMArgs(String versionName, File gameDir) {
         JMinecraftVersionList.Version versionInfo = Tools.getVersionInfo(versionName, true);
-        // Parse Forge 1.17+ additional JVM Arguments
-        if (versionInfo.inheritsFrom == null || versionInfo.arguments == null || versionInfo.arguments.jvm == null) {
+        if (versionInfo.arguments == null || versionInfo.arguments.jvm == null) {
             return new String[0];
         }
 
@@ -747,12 +746,10 @@ public final class Tools {
         varArgMap.put("natives_directory", Tools.NATIVE_LIB_DIR);
 
         List<String> minecraftArgs = new ArrayList<>();
-        if (versionInfo.arguments != null) {
-            for (Object arg : versionInfo.arguments.jvm) {
-                if (arg instanceof String) {
-                    minecraftArgs.add((String) arg);
-                } //TODO: implement (?maybe?)
-            }
+        for (Object arg : versionInfo.arguments.jvm) {
+            if (arg instanceof String) {
+                minecraftArgs.add((String) arg);
+            } //TODO: implement (?maybe?)
         }
         return JSONUtils.insertJSONValueList(minecraftArgs.toArray(new String[0]), varArgMap);
     }
