@@ -20,7 +20,6 @@ jar {
     // Modules to copy over to the components directory instead of patching and merging
     String[] excludedModules = [
             "lwjgl-lwjglx.jar",
-            "lwjgl.jar",
             "jsr305.jar",
             "lwjgl-freetype.jar",
             "lwjgl-jemalloc.jar",
